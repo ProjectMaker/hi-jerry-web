@@ -10,7 +10,8 @@ const compiler = webpack(config);
 const DIST_DIR = path.join(__dirname, "dist");
 const HTML_FILE = path.join(DIST_DIR, "index.html");
 
-const isDevelopment = false;
+const isDevelopment = process.env.NODE_ENV !== "production";
+console.log('*********************** process.env.NODE_ENV', process.env.NODE_ENV);
 if (isDevelopment) {
   app.use(webpackDevMiddleware(compiler, {
     publicPath: config.output.publicPath,
@@ -31,5 +32,5 @@ app.get('/api', (req, res) => {
 });
 
 const port = process.env.PORT || 3000;
-console.log('************************* port', port);
+console.log('************************* port', port, );
 app.listen(port);
