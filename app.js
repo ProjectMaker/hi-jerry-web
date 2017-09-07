@@ -28,5 +28,4 @@ if (isDevelopment) {
   });
 }
 
-console.log('************************* port, isDevelopment', port, isDevelopment );
 app.listen(port);
