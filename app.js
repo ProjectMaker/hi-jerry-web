@@ -19,7 +19,7 @@ mongoose.connect('mongodb://dev:Rudeboy77@ds161890.mlab.com:61890/affinity');
 app.use('/api', api.user.routes);
 app.use('/api', api.place.routes);
 
-if (!isDevelopment) {
+if (isDevelopment) {
   app.use(webpackDevMiddleware(compiler, {
     publicPath: config.output.publicPath,
   }));
