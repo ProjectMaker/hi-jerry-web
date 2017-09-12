@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+const mongoose = require('mongoose');
 const webpack = require('webpack');
 const webpackDevMiddleware = require("webpack-dev-middleware");
 const webpackHotMiddleware = require("webpack-hot-middleware");
@@ -13,7 +14,10 @@ const HTML_FILE = path.join(DIST_DIR, "index.html");
 const isDevelopment = process.env.NODE_ENV !== "production";
 const port = process.env.PORT || 3000;
 
+mongoose.connect('mongodb://dev:Rudeboy77@ds161890.mlab.com:61890/affinity');
+
 app.use('/api', api.user.routes);
+app.use('/api', api.place.routes);
 
 if (isDevelopment) {
   app.use(webpackDevMiddleware(compiler, {
