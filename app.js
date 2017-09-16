@@ -8,6 +8,7 @@ const config = require("./config/webpack.dev.js");
 const api = require('./api');
 const app = express();
 const compiler = webpack(config);
+const jsonwebtoken = require('jsonwebtoken');
 
 const DIST_DIR = path.join(__dirname, "dist");
 const HTML_FILE = path.join(DIST_DIR, "index.html");
@@ -16,10 +17,23 @@ const port = process.env.PORT || 3000;
 
 mongoose.connect('mongodb://dev:Rudeboy77@ds161890.mlab.com:61890/affinity');
 
-app.use('/api', api.user.routes);
-app.use('/api', api.place.routes);
+app.use((req, res, next) => {
+  if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {
+    jsonwebtoken.verify(req.headers.authorization.split(' ')[1], 'RESTFULAPIs', (err, decode) => {
+      if (err) delete req.user;
+      req.user = decode;
+      next();
+    })
+  } else {
+    delete req.user;
+    next();
+  }
+});
 
-if (isDevelopment) {
+app.use('/user', api.user.routes);
+app.use('/api', api.user.loginRequired, api.place.routes);
+
+if (!isDevelopment) {
   app.use(webpackDevMiddleware(compiler, {
     publicPath: config.output.publicPath,
   }));
