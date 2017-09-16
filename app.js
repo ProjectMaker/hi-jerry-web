@@ -17,18 +17,7 @@ const port = process.env.PORT || 3000;
 
 mongoose.connect('mongodb://dev:Rudeboy77@ds161890.mlab.com:61890/affinity');
 
-app.use((req, res, next) => {
-  if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {
-    jsonwebtoken.verify(req.headers.authorization.split(' ')[1], 'RESTFULAPIs', (err, decode) => {
-      if (err) delete req.user;
-      req.user = decode;
-      next();
-    })
-  } else {
-    delete req.user;
-    next();
-  }
-});
+app.use(api.user.authentification);
 
 app.use('/user', api.user.routes);
 app.use('/api', api.user.loginRequired, api.place.routes);
