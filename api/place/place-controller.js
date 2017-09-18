@@ -3,7 +3,6 @@ const Place = require('./place-model');
 class PlaceController {
 
   static index(req, res) {
-    console.log('PlaceController, index');
     Place.find({}, (err, places) => {
       res.json(places);
     });
@@ -25,14 +24,12 @@ class PlaceController {
   }
 
   static getById(req, res) {
-    console.log('PlaceController, getById');
     Place.findOne({_id: req.params.id})
       .then(place => res.json(place))
       .catch(err => res.status(500).json({code: err.code, message: err.message}));
   }
 
   static post(req, res) {
-    console.log('PlaceController, post');
     const place = new Place(req.body);
     PlaceController.save(place, res);
   };

@@ -1,9 +1,6 @@
 const User = require('./user-model');
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const jsonwebtoken = require('jsonwebtoken');
-
-const TOKEN_KEY = 'yoyoyo';
+const authentification = require('../../shared/authentification');
 
 class UserController {
   static register(req, res) {
@@ -32,23 +29,10 @@ class UserController {
         if (!user.comparePassword(req.body.password)) {
           res.status(401).json({ message: 'Authentication failed. Wrong password.' });
         } else {
-          return res.json({token: jwt.sign({ email: user.email, _id: user._id, firstname: user.firstname }, TOKEN_KEY, { expiresIn: '1d' })});
+          return res.json({token: authentification.sign({ email: user.email, _id: user._id, firstname: user.firstname })});
         }
       }
     });
-  }
-
-  static authentification(req, res, next) {
-    if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {
-      jsonwebtoken.verify(req.headers.authorization.split(' ')[1], TOKEN_KEY, (err, decode) => {
-        if (err) delete req.user;
-        req.user = decode;
-        next();
-      });
-    } else {
-      delete req.user;
-      next();
-    }
   }
 
   static loginRequired (req, res, next) {

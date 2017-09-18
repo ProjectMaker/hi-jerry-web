@@ -17,10 +17,11 @@ const port = process.env.PORT || 3000;
 
 mongoose.connect('mongodb://dev:Rudeboy77@ds161890.mlab.com:61890/affinity');
 
-app.use(api.user.authentification);
+const authentification = require('./shared/authentification');
+app.use(authentification.initialize());
 
 app.use('/user', api.user.routes);
-app.use('/api', api.user.loginRequired, api.place.routes);
+app.use('/api', authentification.authenticate(), api.place.routes);
 
 if (!isDevelopment) {
   app.use(webpackDevMiddleware(compiler, {
