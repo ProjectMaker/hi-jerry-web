@@ -1,0 +1,24 @@
+<h1 class="title">Register</h1>
+<form>
+  <div class="form-group">
+    <label for="firstname">Firstname</label>
+    <input type="text" class="form-control" id="firstname" placeholder="Firstname">
+  </div>
+  <div class="form-group">
+    <label for="lastname">Lastname</label>
+    <input type="text" class="form-control" id="lastname" placeholder="Lastname">
+  </div>
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input type="email" class="form-control" id="email" placeholder="Email">
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" placeholder="Password">
+  </div>
+  <button type="submit" class="btn btn-success">Register</button>
+  <button class="btn btn-primary" [routerLink]="['/front/account/signin']">I have and account</button>
+</form>
+
+
+
