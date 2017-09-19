@@ -1,22 +1,31 @@
 <h1 class="title">Register</h1>
-<form>
-  <div class="form-group">
-    <label for="firstname">Firstname</label>
-    <input type="text" class="form-control" id="firstname" placeholder="Firstname">
+<form (ngSubmit)="register(registerForm.value)" #registerForm="ngForm">
+  <div class="form-group" [class.has-error]="firstname.dirty && firstname.invalid">
+    <label class="control-label" for="firstname">Firstname</label>
+    <input type="text" class="form-control" id="firstname" placeholder="Firstname"
+           name="firstname" required ngModel #firstname="ngModel" />
+    <div *ngIf="firstname.dirty && firstname.hasError('required')" class="text-danger">Firstname is required</div>
   </div>
-  <div class="form-group">
-    <label for="lastname">Lastname</label>
-    <input type="text" class="form-control" id="lastname" placeholder="Lastname">
+  <div class="form-group" [class.has-error]="lastname.dirty && lastname.invalid">
+    <label class="control-label" for="lastname">Lastname</label>
+    <input type="text" class="form-control" id="lastname" placeholder="Lastname"
+           name="lastname" required ngModel #lastname="ngModel">
+    <div *ngIf="lastname.dirty && lastname.hasError('required')" class="text-danger">Lastname is required</div>
   </div>
-  <div class="form-group">
-    <label for="email">Email address</label>
-    <input type="email" class="form-control" id="email" placeholder="Email">
+  <div class="form-group" [class.has-error]="email.dirty && email.invalid">
+    <label class="control-label" for="email">Email address</label>
+    <input type="email" class="form-control" id="email" placeholder="Email"
+           name="email" ngModel required email #email="ngModel">
+    <div *ngIf="email.dirty && email.hasError('required')" class="text-danger">Email is required</div>
+    <div *ngIf="email.dirty && email.hasError('email')" class="text-danger">Email must be a valid address</div>
   </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" class="form-control" id="password" placeholder="Password">
+  <div class="form-group" [class.has-error]="password.dirty && password.invalid">
+    <label class="control-label" for="password">Password</label>
+    <input type="password" class="form-control" id="password" placeholder="Password" name="password"
+           ngModel required minlength="6" #password="ngModel">
+    <div *ngIf="password.dirty && password.hasError('required')" class="text-danger">Password is required</div>
   </div>
-  <button type="submit" class="btn btn-success">Register</button>
+  <button type="submit" class="btn btn-success" [disabled]="registerForm.invalid">Register</button>
   <button class="btn btn-primary" [routerLink]="['/front/account/signin']">I have and account</button>
 </form>
 
