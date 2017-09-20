@@ -1,5 +1,6 @@
 <h1 class="title">Register</h1>
 <form (ngSubmit)="register(registerForm.value)" #registerForm="ngForm">
+  <div *ngIf="userExists" class="text-danger">User allready exists</div>
   <div class="form-group" [class.has-error]="firstname.dirty && firstname.invalid">
     <label class="control-label" for="firstname">Firstname</label>
     <input type="text" class="form-control" id="firstname" placeholder="Firstname"
