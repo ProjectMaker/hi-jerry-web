@@ -1,38 +1,47 @@
 const User = require('./user-model');
 const bcrypt = require('bcrypt');
 const authentification = require('../../shared/authentification');
+const AuthenticateError = require('../../shared/error/authenticate');
+
 
 class UserController {
   static register(req, res) {
-    const user = new User(req.body);
-    user.hash_password = bcrypt.hashSync(req.body.password, 10);
-    user.save(function(err, user) {
-      if (err) {
-        return res.status(400).send({
-          message: err
-        });
-      } else {
+    User.findOne({ 'authentication.local.email': req.body.email})
+      .then((user) => {
+        if (!user) {
+          const user = new User({
+            authentication: {
+              local: {
+                email: req.body.email,
+                hash_password: bcrypt.hashSync(req.body.password, 10)
+              }
+            },
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+          });
+          return user.save()
+        } else throw new AuthenticateError('register:exists','All ready exists');
+      })
+      .then((user) => {
         delete user.hash_password;
         return res.json(user);
-      }
-    });
+      })
+      .catch(err => {
+        res.status(500).json({code: err.code, message: err.message})
+      });
   }
 
   static signIn(req, res) {
-    User.findOne({
-      email: req.body.email
-    }, function(err, user) {
-      if (err) throw err;
-      if (!user) {
-        res.status(401).json({ message: 'Authentication failed. User not found.' });
-      } else if (user) {
-        if (!user.comparePassword(req.body.password)) {
-          res.status(401).json({ message: 'Authentication failed. Wrong password.' });
-        } else {
-          return res.json({token: authentification.sign({ email: user.email, _id: user._id, firstname: user.firstname })});
-        }
-      }
-    });
+    User.findOne({ 'authentication.local.email': req.body.email})
+      .then((user) => {
+        if (!user) throw new AuthenticateError('signin:notfound', 'User not found');
+        if (!user.comparePassword(req.body.password)) throw new AuthenticateError('signin:password', 'Wrong password');
+
+        return res.json({token: authentification.sign({ email: user.authentication.local.email, _id: user._id, firstname: user.firstname })});
+      })
+      .catch(err => {
+        res.status(500).json({code: err.code, message: err.message})
+      });
   }
 
   static loginRequired (req, res, next) {
