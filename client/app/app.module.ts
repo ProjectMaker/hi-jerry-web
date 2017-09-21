@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { AccountModule } from './account/account.module';
-
+import { AuthenticationModule } from './shared/authentication/authentication.module';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -14,8 +14,12 @@ import { AppComponent } from './app.component';
     RouterModule,
     NgbModule.forRoot(),
     FormsModule,
+    AuthenticationModule,
 
     AccountModule
+  ],
+  providers: [
+    
   ],
   declarations: [
     AppComponent
