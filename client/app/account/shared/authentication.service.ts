@@ -5,7 +5,7 @@ import { Observable } from "rxjs/Rx";
 const API_URL = 'http://localhost:3000/user/auth';
 
 @Injectable()
-export class UserService {
+export class AuthenticationService {
   constructor(private http:Http) {
 
   }

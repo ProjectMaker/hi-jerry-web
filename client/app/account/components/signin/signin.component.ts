@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { UserService } from '../../shared/user.service';
+import { AuthenticationService } from '../../shared/authentication.service';
 
 @Component({
   selector: 'kl-signin',
@@ -8,7 +8,7 @@ import { UserService } from '../../shared/user.service';
 })
 export class SigninComponent implements OnInit {
   protected userNotExists:boolean = false;
-  public constructor(private userService:UserService) { }
+  public constructor(private authenticationServiceService:AuthenticationService) { }
 
   public ngOnInit() {
     console.log('LoginComponent init');
@@ -16,7 +16,7 @@ export class SigninComponent implements OnInit {
 
   protected signin(value:any) {
     console.log('SIGNIN')
-    this.userService.signin(value)
+    this.authenticationServiceService.signin(value)
       .subscribe(
         (r) => console.log(r),
         (err) => {
