@@ -1,19 +1,26 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const userSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    unique: true,
-    lowercase: true,
-    trim: true,
-    required: true
+  authentication: {
+    local: {
+      email: {
+        type: String,
+        unique: true,
+        lowercase: true,
+        trim: true,
+        required: true
+      },
+      hash_password: {
+        type: String,
+        required: true
+      }
+    }
+  },
+  lastname: {
+    type: String
   },
   firstname: {
     type: String
-  },
-  hash_password: {
-    type: String,
-    required: true
   },
   createdAt: {
     type: Date,
@@ -23,7 +30,7 @@ const userSchema = new mongoose.Schema({
 
 userSchema.methods.comparePassword = function(password) {
   console.log('comparePassword', password, this.email);
-  return bcrypt.compareSync(password, this.hash_password);
+  return bcrypt.compareSync(password, this.authentication.local.hash_password);
 };
 
 module.exports = mongoose.model("User", userSchema);

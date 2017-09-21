@@ -23,11 +23,24 @@ app.use(authentification.initialize());
 app.use('/user', api.user.routes);
 app.use('/api', authentification.authenticate(), api.place.routes);
 
-if (!isDevelopment) {
+
+if (isDevelopment) {
   app.use(webpackDevMiddleware(compiler, {
+    noInfo: true,
     publicPath: config.output.publicPath,
   }));
   app.use(webpackHotMiddleware(compiler));
+
+  app.get("^/front*", (req, res, next) => {
+    compiler.outputFileSystem.readFile(HTML_FILE, (err, result) => {
+      if (err) {
+        return next(err);
+      }
+      res.set('content-type', 'text/html');
+      res.send(result);
+      res.end();
+    });
+  });
 } else {
   app.use(express.static(DIST_DIR));
 
@@ -36,4 +49,5 @@ if (!isDevelopment) {
   });
 }
 
+//const HiJerryError = require('./shared/error');
 app.listen(port);
