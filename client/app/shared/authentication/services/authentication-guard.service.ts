@@ -9,7 +9,6 @@ export class AuthenticationGuardService implements CanActivate {
   constructor(private auth: AuthenticationService, private router: Router) {}
 
   canActivate() {
-    console.log('canActivate');
     if(this.auth.loggedIn()) {
       return true;
     } else {
