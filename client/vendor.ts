@@ -7,6 +7,8 @@ import '@angular/http';
 import '@angular/router';
 import '@angular/forms';
 
+import 'angular2-jwt';
+
 // RxJS
 import 'rxjs';
 

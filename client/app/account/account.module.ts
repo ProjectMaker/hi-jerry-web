@@ -6,8 +6,6 @@ import { HttpModule } from '@angular/http';
 
 import { routes, navigatableComponents } from './account.routes';
 
-import { UserService } from './shared/user.service';
-
 @NgModule({
   imports: [
     RouterModule,
@@ -20,7 +18,7 @@ import { UserService } from './shared/user.service';
     ...navigatableComponents
   ],
   providers: [
-    UserService
+    
   ]
 
   /*,
