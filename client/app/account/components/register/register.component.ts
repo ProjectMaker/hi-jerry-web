@@ -39,8 +39,4 @@ export class RegisterComponent implements OnInit {
         () => console.log('complete')
       )
   }
-
-  protected logoutFB() {
-    this.fb.logout();
-  }
 }
