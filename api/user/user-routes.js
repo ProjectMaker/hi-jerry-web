@@ -12,6 +12,7 @@ const userResponse = (req, res) => {
 router.get('/', UserController.loginRequired, userResponse);
 
 router.post('/auth/register', jsonParser, UserController.register);
-router.post('/auth/sign-in', jsonParser, UserController.signIn);
+router.post('/auth/signin/local', jsonParser, UserController.signIn);
+router.post('/auth/signin/facebook', jsonParser, UserController.signInFacebook);
 
 module.exports = router;
