@@ -28,6 +28,8 @@
   </div>
   <button type="submit" class="btn btn-success" [disabled]="registerForm.invalid">Register</button>
   <button class="btn btn-primary" [routerLink]="['/front/account/signin']">I have and account</button>
+  <a class="btn btn-primary" (click)="loginFB()">Facebook</a>
+  <a class="btn btn-primary" (click)="logoutFB()">Facebook logout</a>
 </form>
 
 
