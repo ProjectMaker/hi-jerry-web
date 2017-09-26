@@ -3,7 +3,7 @@ import { Http, Response } from "@angular/http";
 import { Observable } from "rxjs/Rx";
 import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
 
-const API_URL = 'http://localhost:3000/user/auth';
+const API_URL = 'http://localhost:8080/user/auth';
 
 @Injectable()
 export class AuthenticationService {
@@ -25,8 +25,8 @@ export class AuthenticationService {
       .catch((err:Response) => this.handleErrors(err))
   }
 
-  public signin(account:any) {
-    return this.http.post(`${API_URL}/sign-in`, account)
+  public signin(type:string, account:any) {
+    return this.http.post(`${API_URL}/signin/${type}`, account)
       .map((response:Response) => {
         const token = response.json() && response.json().token;
         if (token) {

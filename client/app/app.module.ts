@@ -3,9 +3,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule }  from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { FacebookModule } from 'ngx-facebook';
 
 import { AccountModule } from './account/account.module';
 import { AuthenticationModule } from './shared/authentication/authentication.module';
+import { SocialModule } from './shared/social/social.module';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -15,7 +17,8 @@ import { AppComponent } from './app.component';
     NgbModule.forRoot(),
     FormsModule,
     AuthenticationModule,
-
+    SocialModule,
+    FacebookModule.forRoot(),
     AccountModule
   ],
   providers: [

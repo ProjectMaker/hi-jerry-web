@@ -17,7 +17,7 @@ export class SigninComponent implements OnInit {
 
   protected signin(value:any) {
     console.log('SIGNIN')
-    this.authenticationServiceService.signin(value)
+    this.authenticationServiceService.signin('local', value)
       .subscribe(
         (r) => {
           this.authHttp.get('http://localhost:3000/api/place')
