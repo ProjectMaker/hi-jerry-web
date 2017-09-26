@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { FacebookModule } from 'ngx-facebook';
 
 import { AccountModule } from './account/account.module';
+import { PlaceModule } from './place/place.module';
 import { AuthenticationModule } from './shared/authentication/authentication.module';
 import { SocialModule } from './shared/social/social.module';
 import { AppComponent } from './app.component';
@@ -19,7 +20,8 @@ import { AppComponent } from './app.component';
     AuthenticationModule,
     SocialModule,
     FacebookModule.forRoot(),
-    AccountModule
+    AccountModule,
+    PlaceModule
   ],
   providers: [
     

@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
     this.fb.login()
       .concatMap(account => this.authenticationServiceService.signin('facebook', account))
       .subscribe(
-        (r) => this.router.navigate(['/front/account/signin']),
+        (r) => this.router.navigate(['/front/my-places']),
         (err) => {
           err = err.json();
           if (err.code === 'register:exists') this.userExists = true;
