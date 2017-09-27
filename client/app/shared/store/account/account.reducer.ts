@@ -16,7 +16,7 @@ export function account(state = initialAccountState, action: Action): IAccount {
     case AccountActions.SIGNIN:
       return Object.assign({}, state, { profile: action.payload, authentication: true });
     case AccountActions.LOGOUT:
-      return Object.assign({}, state, { authentication: false });
+      return Object.assign({}, { authentication: false, profile: {} });
     default:
       return state;
   }
