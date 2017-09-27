@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpModule,Http, RequestOptions } from '@angular/http';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 
+import { SocialModule } from '../social/social.module';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthenticationGuardService } from './services/authentication-guard.service';
 
@@ -22,7 +23,8 @@ const authHttpServiceFactory = (http: Http, options: RequestOptions) => {
 @NgModule({
   imports: [
     CommonModule,
-    HttpModule
+    HttpModule,
+    SocialModule
   ],
   declarations: [
 

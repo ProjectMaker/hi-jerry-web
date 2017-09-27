@@ -44,7 +44,7 @@ if (isDevelopment) {
 } else {
   app.use(express.static(DIST_DIR));
 
-  app.get('/front', (req, res) => {
+  app.get('^/front*', (req, res) => {
     res.sendFile(HTML_FILE);
   });
 }

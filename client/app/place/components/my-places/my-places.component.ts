@@ -13,7 +13,8 @@ export class MyPlacesComponent implements OnInit {
   public ngOnInit() {
     console.log('LoginComponent init');
     this.places = this.authHttp.get('http://localhost:8080/api/place')
-      .map(res => res.json());
+      .map(res => res.json())
+      .catch(err => { console.log(err); return err; });
   }
 
   protected signin(value:any) {

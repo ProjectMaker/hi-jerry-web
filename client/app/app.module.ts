@@ -21,7 +21,10 @@ import { AppComponent } from './app.component';
     SocialModule,
     FacebookModule.forRoot(),
     AccountModule,
-    PlaceModule
+    PlaceModule,
+    RouterModule.forRoot([
+      { path: 'front', redirectTo: 'front/my-places', pathMatch: 'full' },
+    ])
   ],
   providers: [
     

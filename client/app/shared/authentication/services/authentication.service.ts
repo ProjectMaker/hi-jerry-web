@@ -1,7 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Http, Response } from "@angular/http";
 import { Observable } from "rxjs/Rx";
-import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
+import { JwtHelper } from 'angular2-jwt';
+
+import { SocialFacebookService } from '../../social/services/social-facebook.service';
 
 const API_URL = 'http://localhost:8080/user/auth';
 
@@ -10,13 +12,19 @@ export class AuthenticationService {
   private token:string;
   private jwtHelper: JwtHelper = new JwtHelper();
 
-  constructor(private http:Http) {
+  constructor(private http:Http, private fb:SocialFacebookService) {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.token = currentUser && currentUser.token;
   }
 
   public loggedIn() {
     return this.token && !this.jwtHelper.isTokenExpired(this.token);
+  }
+
+  public logout() {
+    localStorage.removeItem('currentUser');
+    this.token = null;
+    this.fb.logout();
   }
 
   public register(account:any) {
