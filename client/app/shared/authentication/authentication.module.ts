@@ -6,6 +6,7 @@ import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { SocialModule } from '../social/social.module';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthenticationGuardService } from './services/authentication-guard.service';
+import { CoreStoreModule } from '../store'
 
 const authHttpServiceFactory = (http: Http, options: RequestOptions) => {
   const config = {
@@ -24,7 +25,8 @@ const authHttpServiceFactory = (http: Http, options: RequestOptions) => {
   imports: [
     CommonModule,
     HttpModule,
-    SocialModule
+    SocialModule,
+    CoreStoreModule
   ],
   declarations: [
 
