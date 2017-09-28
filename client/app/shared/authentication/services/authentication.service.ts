@@ -6,7 +6,8 @@ import { Store } from '@ngrx/store';
 
 import { SocialFacebookService } from '../../social/services/social-facebook.service';
 import { AppState } from '../../store';
-import { AccountActions } from '../../store/account/account.actions';
+import { AuthActions } from '../../store/auth/auth.actions';
+import { getToken$ } from '../../store/auth/auth.selectors';
 
 const API_URL = 'http://localhost:8080/user/auth';
 
@@ -17,11 +18,14 @@ export class AuthenticationService {
 
   constructor(private http:Http,
               private fb:SocialFacebookService,
-              private accountActions:AccountActions,
+              private authActions:AuthActions,
               private store:Store<AppState>) {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.token = currentUser && currentUser.token;
-    if (this.loggedIn()) this.store.dispatch(this.accountActions.signin(currentUser));
+
+    this.store.let(getToken$)
+      .subscribe(
+        (token) => this.token = token,
+        (err) => console.log(err)
+      );
   }
 
   public loggedIn() {
@@ -32,7 +36,7 @@ export class AuthenticationService {
     localStorage.removeItem('currentUser');
     this.token = null;
     this.fb.logout();
-    this.store.dispatch(this.accountActions.logout())
+    this.store.dispatch(this.authActions.logout())
   }
 
   public register(account:any) {
@@ -47,8 +51,7 @@ export class AuthenticationService {
         const token = response.json() && response.json().token;
         if (token) {
           this.token = token;
-          localStorage.setItem('currentUser', JSON.stringify({ email: account.email, token: this.token }));
-          this.store.dispatch(this.accountActions.signin(account));
+          this.store.dispatch(this.authActions.signin(token));
           return true;
         } else return false;
       })
