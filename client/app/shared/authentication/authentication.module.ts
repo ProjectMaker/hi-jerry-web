@@ -12,7 +12,7 @@ const authHttpServiceFactory = (http: Http, options: RequestOptions) => {
   const config = {
     headerPrefix: 'JWT',
     tokenGetter: (() => {
-      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      const currentUser = JSON.parse(localStorage.getItem('auth'));
       return currentUser.token;
     }),
     globalHeaders: [{'Content-Type':'application/json'}]

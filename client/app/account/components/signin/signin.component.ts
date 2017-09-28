@@ -19,7 +19,7 @@ export class SigninComponent implements OnInit {
   protected signin(value:any) {
     this.authenticationServiceService.signin('local', value)
       .subscribe(
-        (r) => this.router.navigate(['/front/my-places']),
+        (r) => console.log('COOOL'),//this.router.navigate(['/front/my-places']),
         (err) => {
           err = err.json();
           if (err.code === 'signin:notfound') this.userNotExists = true;

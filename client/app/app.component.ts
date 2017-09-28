@@ -6,7 +6,7 @@ import 'rxjs/add/operator/let';
 import '../assets/css/styles.css';
 import { AuthenticationService } from './shared/authentication/services/authentication.service';
 import { AppState } from './shared/store';
-import { getIsUserSignedIn$ } from './shared/store/account/account.selectors';
+import { getIsUserSignedIn$ } from './shared/store/auth/auth.selectors';
 
 @Component({
   selector: 'my-app',
