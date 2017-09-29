@@ -1,27 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthService } from '../../../core/services';
-import { SocialFacebookService } from '../../../core/services';
+import { AuthService } from '../../../../core/services';
+import { SocialFacebookService } from '../../../../core/services';
 
 @Component({
-  selector: 'kl-register',
-  templateUrl: './register.html'
+  selector: 'kl-signin',
+  templateUrl: './signin.html'
 })
-export class RegisterComponent implements OnInit {
-  protected userExists:boolean = false;
+export class SigninComponent implements OnInit {
+  protected userNotExists:boolean = false;
   public constructor(private auth:AuthService, private fb:SocialFacebookService, private router:Router) { }
+
   public ngOnInit() {
-    console.log('RegisterComponent init');
+    console.log('LoginComponent init');
   }
 
-  protected register(value:any) {
-    this.auth.register(value)
+  protected signin(value:any) {
+    this.auth.signin('local', value)
       .subscribe(
-        (r) => this.router.navigate(['/front/account/signin']),
+        (r) => this.router.navigate(['/front/my-places']),
         (err) => {
           err = err.json();
-          if (err.code === 'register:exists') this.userExists = true;
+          if (err.code === 'signin:notfound') this.userNotExists = true;
+          console.log(err)
         },
         () => console.log('complete')
       )
@@ -34,7 +36,6 @@ export class RegisterComponent implements OnInit {
         (r) => this.router.navigate(['/front/my-places']),
         (err) => {
           err = err.json();
-          if (err.code === 'register:exists') this.userExists = true;
         },
         () => console.log('complete')
       )

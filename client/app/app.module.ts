@@ -6,9 +6,10 @@ import { FacebookModule } from 'ngx-facebook';
 
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
-import { AccountModule } from './account/account.module';
-import { PlaceModule } from './place/place.module';
+
 import { AppComponent } from './app.component';
+import { APP_CONTAINER_MODULES } from './containers';
+
 
 @NgModule({
   imports: [
@@ -16,10 +17,9 @@ import { AppComponent } from './app.component';
     RouterModule,
     NgbModule.forRoot(),
     FacebookModule.forRoot(),
-    AccountModule,
-    PlaceModule,
     CoreModule,
     SharedModule,
+    ...APP_CONTAINER_MODULES,
     RouterModule.forRoot([
       { path: 'front', redirectTo: 'front/my-places', pathMatch: 'full' },
     ])
