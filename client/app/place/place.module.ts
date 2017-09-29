@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
+import { SharedModule } from '../shared/shared.module';
 
 import { routes, navigatableComponents } from './place.routes';
 
@@ -10,9 +9,8 @@ import { routes, navigatableComponents } from './place.routes';
   imports: [
     RouterModule,
     RouterModule.forRoot(routes),
-    FormsModule,
-    CommonModule,
-    HttpModule
+    HttpModule,
+    SharedModule
   ],
   declarations: [
     ...navigatableComponents
