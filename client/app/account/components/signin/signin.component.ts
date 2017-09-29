@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthService } from '../../../core/services/auth/auth.service';
-import { SocialFacebookService } from '../../../core/services/social/social-facebook.service';
+import { AuthService } from '../../../core/services';
+import { SocialFacebookService } from '../../../core/services';
 
 @Component({
   selector: 'kl-signin',
