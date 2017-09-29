@@ -1,12 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { Store } from '@ngrx/store';
-import 'rxjs/add/operator/let';
-
 import '../assets/css/styles.css';
-import { AuthService } from './core/services/auth/auth.service';
-import { AppState } from './core/store';
-import { getIsUserSignedIn$ } from './core/store/auth/auth.selectors';
 
 @Component({
   selector: 'my-app',
@@ -14,12 +7,5 @@ import { getIsUserSignedIn$ } from './core/store/auth/auth.selectors';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  protected isSignedIn$ = this.store.let(getIsUserSignedIn$);
-
-  public constructor(private auth:AuthService, private router:Router, private store:Store<AppState>) { }
-  
-  protected logout() {
-    this.auth.logout();
-    this.router.navigate(['/front/account/signin']);
-  }
+  public constructor() { }
 }
