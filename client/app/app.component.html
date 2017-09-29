@@ -1,16 +1,4 @@
-<nav class="navbar navbar-inverse" *ngIf="isSignedIn$ | async">
-  <div class="container">
-    <div class="navbar-header">
-      <a class="navbar-brand" [routerLink]="['/']">Hi Jerry</a>
-    </div>
-    <div id="navbar" class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li ><a [routerLink]="['/front/my-places']">Mes places</a></li>
-        <li><a (click)="logout()">Logout</a></li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div>
-</nav>
+<kl-nav></kl-nav>
 <main>
   <!--<img src="../assets/images/angular.png">-->
   <router-outlet></router-outlet>
