@@ -4,7 +4,7 @@ import { Observable } from "rxjs/Rx";
 import { JwtHelper } from 'angular2-jwt';
 import { Store } from '@ngrx/store';
 
-import { SocialFacebookService } from '../../social/services/social-facebook.service';
+import { SocialFacebookService } from '../social/social-facebook.service';
 import { AppState } from '../../store';
 import { AuthActions } from '../../store/auth/auth.actions';
 import { getToken$ } from '../../store/auth/auth.selectors';
@@ -12,7 +12,7 @@ import { getToken$ } from '../../store/auth/auth.selectors';
 const API_URL = 'http://localhost:8080/user/auth';
 
 @Injectable()
-export class AuthenticationService {
+export class AuthService {
   private token:string;
   private jwtHelper: JwtHelper = new JwtHelper();
 

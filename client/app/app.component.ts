@@ -4,9 +4,9 @@ import { Store } from '@ngrx/store';
 import 'rxjs/add/operator/let';
 
 import '../assets/css/styles.css';
-import { AuthenticationService } from './shared/authentication/services/authentication.service';
-import { AppState } from './shared/store';
-import { getIsUserSignedIn$ } from './shared/store/auth/auth.selectors';
+import { AuthService } from './core/services/auth/auth.service';
+import { AppState } from './core/store';
+import { getIsUserSignedIn$ } from './core/store/auth/auth.selectors';
 
 @Component({
   selector: 'my-app',
@@ -16,7 +16,7 @@ import { getIsUserSignedIn$ } from './shared/store/auth/auth.selectors';
 export class AppComponent {
   protected isSignedIn$ = this.store.let(getIsUserSignedIn$);
 
-  public constructor(private auth:AuthenticationService, private router:Router, private store:Store<AppState>) { }
+  public constructor(private auth:AuthService, private router:Router, private store:Store<AppState>) { }
   
   protected logout() {
     this.auth.logout();

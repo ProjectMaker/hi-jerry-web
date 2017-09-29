@@ -7,9 +7,7 @@ import { FacebookModule } from 'ngx-facebook';
 
 import { AccountModule } from './account/account.module';
 import { PlaceModule } from './place/place.module';
-import { AuthenticationModule } from './shared/authentication/authentication.module';
-import { SocialModule } from './shared/social/social.module';
-import { CoreStoreModule } from './shared/store'
+import { CoreModule } from './core/core.module';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -18,12 +16,10 @@ import { AppComponent } from './app.component';
     RouterModule,
     NgbModule.forRoot(),
     FormsModule,
-    AuthenticationModule,
-    SocialModule,
     FacebookModule.forRoot(),
     AccountModule,
     PlaceModule,
-    CoreStoreModule,
+    CoreModule,
     RouterModule.forRoot([
       { path: 'front', redirectTo: 'front/my-places', pathMatch: 'full' },
     ])
