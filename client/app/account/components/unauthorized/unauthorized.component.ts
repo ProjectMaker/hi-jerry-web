@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 
-import { AuthenticationService } from '../../../shared/authentication/services/authentication.service';
+import { AuthService } from '../../../core/services/auth/auth.service';
 
 @Component({
   selector: 'kl-unauthorized',
